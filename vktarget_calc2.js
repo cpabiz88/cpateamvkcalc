@@ -1,3 +1,5 @@
+// изменение 1
+
 function getDefaultCellColor (tableColumnClass, orderNumber) {
   var cellColor;
   var cellElement;
