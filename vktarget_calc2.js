@@ -1,5 +1,21 @@
-// изменение 1
-// изменение 2
+function clearCells() {
+  var white = '#FFF';
+  var blue = '#F0F2F4';
+  var row = document.getElementsByClassName('column_clicks_count_view');
+  var len = document.getElementsByClassName('column_clicks_count_view').length;
+
+  for (i = 1; i < len; i++) {
+    console.log(row[i]);
+    if (i % 2 != 0) {
+      row[i].style.backgroundColor = white;
+    } else {
+      row[i].style.backgroundColor = blue;
+    }
+    row[i].style.borderLeft = '0px';
+  }
+
+  
+}
 
 function getDefaultCellColor (tableColumnClass, orderNumber) {
   var cellColor;
@@ -19,8 +35,12 @@ function setDefaultCellColor(tableColumnClass, orderNumber, cellColor) {
 }
 
 
-function getCheckBad() {
-  return document.getElementsByName('CheckBad')[0].checked;
+function CheckBad() {
+  return document.getElementById('CheckRed').checked;
+}
+
+function CheckGood() {
+  return document.getElementById('CheckGreen').checked;
 }
 
 function getPlus() {
@@ -31,62 +51,115 @@ function getMinus() {
   return parseFloat(document.getElementsByName('minus')[0].value).toFixed(2);
 }
 
+// ================================DO JOB ===============================
+// ================================DO JOB ===============================
+// ================================DO JOB ===============================
+// ================================DO JOB ===============================
 function doJob() {
 
-  len = document.getElementsByClassName('column_money_amount_view').length;
-    //chklen = 0;
-
+    len = document.getElementsByClassName('column_money_amount_view').length;
     money = document.getElementsByClassName('column_money_amount_view');
     click = document.getElementsByClassName('column_clicks_count_view');
 
-    clear_clicks = 0;
 
-    items_count = (len - 3);
+    var good = 0; // подсчитываем сколько плохих и хороших полей
+    var bad = 0;
+    var same = 0;
 
-    for (i = 1; i < len; i++) {
+    click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
 
-      // var tmp[];
-      tmp[i] = getDefaultCellColor('column_clicks_count_view', i);
-      alert(tmp);
+    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
 
-      click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
-      click[i].style.color = 'black';
+    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
+    clearCells();
 
-      var cpc = (parseFloat(money[i].innerHTML.replace(' ', '')) / parseInt(click[i].innerHTML)).toFixed(2);
 
-      if (click[i].innerHTML > 0) {
+
+
+for (i = 1; i < len; i++) {
+
+click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
+click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
+
+
+
+
+click[i].style.color = 'black';
+
+  
+
+  var cpc = (parseFloat(money[i].innerHTML.replace(' ', '')) / parseInt(click[i].innerHTML)).toFixed(2);
+
+  if (click[i].innerHTML > 0) {
+      
+      if (CheckBad()) {
+        console.log('checkbad');
+
         if (cpc > Number(getMinus())) {
+          // bad++;
+          click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
           click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
-          click[i].style.color = 'red';
-          click[i].style.backgroundColor = '#FCD2BD';
-          click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/D83DDC4E_2x.png" width="16" height="16">';
 
-                //chk = document.getElementById('cb_row_' + chklen + '_0');
+          
+            click[i].style.color = 'red';
+            click[i].style.backgroundColor = '#FAD7D4';
+            click[i].style.borderLeft = '3px solid #F08A81';
 
-                /*				if (getCheckBad())
-                				{
-                					if (chklen < len - 2)
-                					{
-                						chk.click();
-                						chklen++;
-                					}
-                        }*/
-                      }
-
-
-
-            //click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
-            if (cpc < Number(getPlus())) {
-              click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
-              click[i].style.color = 'Green';
-              click[i].style.backgroundColor = '#DCFFBE';
-              click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/D83DDC4D_2x.png" width="16" height="16">';
-
-                //chklen++;
-              }
-            }
-          }
+            click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2B07_2x.png" width="16" height="16">';          
         }
+      }
+      
+
+      if (CheckGood()) {
+      if (cpc < Number(getPlus())) {
+
+        // good++;
+        click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
+        click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
+        
+        click[i].style.color = 'Green';
+        click[i].style.backgroundColor = '#DCFFBE';
+        click[i].style.borderLeft = '3px solid #A7EF6A';
+
+        click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2B06_2x.png" width="16" height="16">';
+      }
+      } 
+
+
+      if (cpc == Number(getPlus())) {
+            // same++;
+            click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
+            click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
+
+            click[i].style.color = '#558ABB';
+            click[i].style.backgroundColor = '#DDE4E9';
+            click[i].style.borderLeft = '3px solid #558ABB';
+            click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2194_2x.png" width="16" height="16">';
+        }
+      }
+        
+      }
+    
+    
+    for (i=1; i<len;i++) {
+       if (click[i].style.backgroundColor == 'rgb(250, 215, 212)') bad++ ;
+      if (click[i].style.backgroundColor == 'rgb(220, 255, 190)') good++ ;
+      if (click[i].style.backgroundColor == 'rgb(221, 228, 233)') same++ ;
+    }
+
+
+
+    click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
+
+    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
+
+    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
+
+
+    // click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
+    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
+    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
+}
 
         function doCPC() {
           var len = document.getElementsByClassName('column_money_amount_view').length;
@@ -95,7 +168,11 @@ function doJob() {
 
           for (i = 1; i < len; i++) {
         // Очистим форматирование столбца кликов+цена за клик
-        click[i].innerHTML = click[i].innerHTML.replace(/\s\[.*/, '');
+          // clearCells();
+          alert(click[i]);
+          click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
+          click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
+
         // Сбросим цвет
         click[i].style.color = 'Black';
 
@@ -111,6 +188,8 @@ function doJob() {
 
 
     function drawInterface() {
+
+      // drawBorder();
 
       var menu = document.getElementsByClassName('ads_selecting_subclasses');
       var iface = menu[0].innerHTML;
@@ -149,19 +228,35 @@ function doJob() {
 
     //iface = iface + '<div style="height: 5px;"></div>';
 
-    iface = iface + '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #E3E9EE; padding: 5px; margin-left: -3px">';
 
 
-    iface = iface + '<img src="https://vk.com/images/emoji/D83DDC4D_2x.png" width="16" height="16">';
-
-    iface = iface + '&nbsp<input type="number" name="plus" step="0.01" autocomplete="off" style="width: 50px;">&nbsp&nbsp&nbsp';
-
-    iface = iface + '<img src="https://vk.com/images/emoji/D83DDC4E_2x.png" width="16" height="16">';
-
-    iface = iface + '&nbsp<input type="number" name="minus" step="0.01" autocomplete="off" style="width: 50px;">&nbsp&nbsp&nbsp';
 
 
+
+
+    // ==================Блок для первого эдита и пальца зеленый==================================
+    iface = iface + '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; padding: 5px; margin-left: -3px">';
+        iface = iface + '<img src="https://vk.com/images/emoji/D83DDC4D_2x.png" width="16" height="16">';
+        iface = iface + '&nbsp<input type="number" min="0" value="0" name="plus" step="0.01" autocomplete="off" style="width: 50px;">&nbsp&nbsp&nbsp';
+        iface = iface + '<input type="checkbox" class="ads_lite_cb" id="CheckGreen">';
+    iface = iface + '</div>';
+
+    // ==================Блок для второго эдита и пальца красный==================================
+    iface = iface + '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #FAD7D4; padding: 5px; margin-left: -3px">';
+        iface = iface + '<input type="checkbox" class="ads_lite_cb" id="CheckRed">';
+        iface = iface + '&nbsp<input type="number" min="0" value="0" name="minus" step="0.01" autocomplete="off" style="width: 50px;">&nbsp&nbsp&nbsp';
+        iface = iface + '<img src="https://vk.com/images/emoji/D83DDC4E_2x.png" width="16" height="16">';
     iface = iface + '</div><br/>';
+    // ===========================================================================================
+
+
+
+
+
+
+
+
+
     // Другая кнопка
 
     // ---------------------------------------------------4------------------------------------------------
@@ -176,15 +271,17 @@ function doJob() {
 
     iface = iface + '</div>';
 
+    iface = iface + '<div id="top_profile_menu" style="visibility: visible">HELLO WORLD!</div>';
+    
     menu[0].innerHTML = iface;
   }
 
 
-  var tmp = [];
   drawInterface();
-
-
-
+  // clearCells();
+  // document.cookie="vktargetpop=off";
+  // alert(document.cookie);
+        
 
 //menu[0].innerHTML = menu[0].innerHTML + '&nbsp&nbsp&nbsp&nbsp<a href="http://vk.com/robo9"><img src="https://vk.com/images/emoji/D83CDF4D_2x.png" width="16" height="16" alt=":)"></a><br/><input type="checkbox" name="CheckBad">';
 /*menu[0].innerHTML = menu[0].innerHTML + ' | <img src="https://vk.com/images/emoji/2795_2x.png" width="16" height="16"><input type="number" name="plus" size="5" value="3.00">';
