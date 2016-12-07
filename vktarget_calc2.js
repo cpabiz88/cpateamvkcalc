@@ -189,7 +189,10 @@ click[i].style.color = 'black';
       }
     }
 
-
+function bannerOff() {
+  banner = document.getElementById('bannerDiv');
+  banner.style.display='none';
+}
 
     function drawInterface() {
 
@@ -200,19 +203,20 @@ click[i].style.color = 'black';
 
     // добавляем пустой отступ
     iface = iface + '<div style="height: 20px;"></div>';
-    // iface = iface + '<img src="http://www.cpateam.ru/styles/basic/xenforo/logo.png"><br/>';
-    iface = iface + '<strong>VK Target Assistant Tool</strong>';
+    iface = iface + '<img src="http://www.cpateam.ru/styles/basic/xenforo/logo.png"><br/>';
+    iface = iface + '<strong>CPATEAM VK Target Assistant Tool</strong>';
     iface = iface + '<div style="height: 20px;"></div>';
 
     // ================== BANNER =======================================
 
-     iface = iface + '<div style="border: solid 1px #FFE070; background: #FFF4CC; padding: 5px; margin-left: -3px">';
+     iface = iface + '<div id="bannerDiv" style="border: solid 1px #FFE070; background: #FFF4CC; padding: 5px; margin-left: -3px">';
 
      name = document.getElementsByClassName('top_profile_name').item(0).innerText;
-     iface = iface + '<strong>Привет, '+ name + '! Секундочку внимания!</strong>';    
+     iface = iface + 'Привет, <strong>'+ name + '</strong>! Секундочку внимания!'; 
 
+     iface = iface + '<br /><br /><input type="checkbox" class="ads_lite_cb" id="banner" onclick=bannerOff()><label for="banner">Хорошо,</label>';
      iface = iface + '</div>';
-     iface = iface + '<div style="height: 20px;"></div>';
+     // iface = iface + '<div style="height: 20px;"></div>';
 
 
     // =================================================================

@@ -1,0 +1,27 @@
+var div = document.createElement('div');
+div.className = "page_block ui_rmenu ui_rmenu_pr";
+div.innerHTML = "<strong>Ура!</strong> Вы прочитали это важное сообщение.";
+
+.appendChild(elem)
+
+
+
+
+
+
+
+
+
+
+
+
+element = document.createElement('div')
+element.className = 'MyDiv'
+element.style.border = '3px solid #F08A81'
+element.style.backgroundColor = '#FAD7D4'
+element.style.padding = '5px'
+element.innerHTML = '<p>Привет мир! Работать с javascript и DOM-деревом необычайно прикольно и захватывающе! Мне нравится делать со страницами HTML то, что я захочу!</p>'
+parent = document.getElementById('paginated_table_control0');
+parent.appendChild(element);
+
+
