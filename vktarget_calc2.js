@@ -66,11 +66,11 @@ function doJob() {
     var bad = 0;
     var same = 0;
 
-    click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
+    // click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
 
-    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
+    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
 
-    click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
+    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
     clearCells();
 
 
@@ -104,6 +104,7 @@ click[i].style.color = 'black';
             click[i].style.color = 'red';
             click[i].style.backgroundColor = '#FAD7D4';
             click[i].style.borderLeft = '3px solid #F08A81';
+            click[i].style.borderRight = '3px solid #F08A81';
 
             click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2B07_2x.png" width="16" height="16">';          
         }
@@ -120,12 +121,13 @@ click[i].style.color = 'black';
         click[i].style.color = 'Green';
         click[i].style.backgroundColor = '#DCFFBE';
         click[i].style.borderLeft = '3px solid #A7EF6A';
+        click[i].style.borderRight = '3px solid #A7EF6A';
 
         click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2B06_2x.png" width="16" height="16">';
       }
       } 
 
-
+      if (CheckGood() || CheckBad()) {
       if (cpc == Number(getPlus())) {
             // same++;
             click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
@@ -134,7 +136,9 @@ click[i].style.color = 'black';
             click[i].style.color = '#558ABB';
             click[i].style.backgroundColor = '#DDE4E9';
             click[i].style.borderLeft = '3px solid #558ABB';
+            click[i].style.borderRight = '3px solid #558ABB';
             click[i].innerHTML = click[i].innerHTML + ' <strong>[CPC: ' + cpc + ' </strong>]&nbsp <img src="https://vk.com/images/emoji/2194_2x.png" width="16" height="16">';
+      }
         }
       }
         
@@ -198,6 +202,21 @@ click[i].style.color = 'black';
     iface = iface + '<div style="height: 20px;"></div>';
     // iface = iface + '<img src="http://www.cpateam.ru/styles/basic/xenforo/logo.png"><br/>';
     iface = iface + '<strong>VK Target Assistant Tool</strong>';
+    iface = iface + '<div style="height: 20px;"></div>';
+
+    // ================== BANNER =======================================
+
+     iface = iface + '<div style="border: solid 1px #FFE070; background: #FFF4CC; padding: 5px; margin-left: -3px">';
+
+     name = document.getElementsByClassName('top_profile_name').item(0).innerText;
+     iface = iface + '<strong>Привет, '+ name + '! Секундочку внимания!</strong>';    
+
+     iface = iface + '</div>';
+     iface = iface + '<div style="height: 20px;"></div>';
+
+
+    // =================================================================
+
     iface = iface + '<div style="height: 5px;"></div>';
     //iface = iface + '<h4 style="font-size: 12px; margin: 0px 0px 6px; ">cpateam.ru </h4>';
     iface = iface + '<div style="height: 5px;"></div>';
@@ -271,7 +290,7 @@ click[i].style.color = 'black';
 
     iface = iface + '</div>';
 
-    iface = iface + '<div id="top_profile_menu" style="visibility: visible">HELLO WORLD!</div>';
+    
     
     menu[0].innerHTML = iface;
   }
