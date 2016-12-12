@@ -13,9 +13,9 @@ div.innerHTML = "<strong>Ура!</strong> Вы прочитали это важ�
 
 
 
+parent.insertBefore(element,parent.children[4]);
 
-
-element = document.createElement('div')
+element1 = document.createElement('div')
 element.className = 'MyDiv'
 element.style.border = '3px solid #F08A81'
 element.style.backgroundColor = '#FAD7D4'

@@ -51,10 +51,7 @@ function getMinus() {
   return parseFloat(document.getElementsByName('minus')[0].value).toFixed(2);
 }
 
-// ================================DO JOB ===============================
-// ================================DO JOB ===============================
-// ================================DO JOB ===============================
-// ================================DO JOB ===============================
+
 function doJob() {
 
     len = document.getElementsByClassName('column_money_amount_view').length;
@@ -66,11 +63,6 @@ function doJob() {
     var bad = 0;
     var same = 0;
 
-    // click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
-
-    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
-
-    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
     clearCells();
 
 
@@ -159,10 +151,6 @@ click[i].style.color = 'black';
 
     click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
 
-
-    // click[0].innerHTML = '<div style="display: inline-block; border: solid 1px #D3DBE1; background: #DCFFBE; font-weight: bold">' + good + '</div>';
-    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #DDE4E9;">' + same + '</div>';
-    // click[0].innerHTML = click[0].innerHTML + '<div style="display: inline-block; border: solid 1px #D3DBE1; font-weight: bold; background: #FAD7D4;">' + bad + '</div>';
 }
 
         function doCPC() {
@@ -171,11 +159,12 @@ click[i].style.color = 'black';
           var click = document.getElementsByClassName('column_clicks_count_view');
 
           for (i = 1; i < len; i++) {
-        // Очистим форматирование столбца кликов+цена за клик
-          // clearCells();
-          alert(click[i]);
+          // Очистим форматирование столбца кликов+цена за клик
+          clearCells();
+        
           click[i].innerHTML = click[i].innerHTML.replace(' [ CPC: NaN ]', '');
           click[i].innerHTML = click[i].innerHTML.replace(/\s\<strong>\[CPC:.*/, '');
+
 
         // Сбросим цвет
         click[i].style.color = 'Black';
